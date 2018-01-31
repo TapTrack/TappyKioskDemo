@@ -38,7 +38,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/tv_app_title"
             app:layout_constraintEnd_toEndOf="parent"
             />
-        <com.taptrack.roaring.findtappies.ChooseTappiesView
+        <com.taptrack.carrot.mainview.ChooseTappiesView
             android:id="@+id/ctv_tappy_chooser"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

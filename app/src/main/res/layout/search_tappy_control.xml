@@ -14,10 +14,10 @@
         android:layout_height="48dp"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:tint="@color/foundTappyColor"
         app:srcCompat="@drawable/ic_cloud_black_24dp"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintEnd_toStartOf="@+id/tv_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>

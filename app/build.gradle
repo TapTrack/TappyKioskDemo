@@ -5,7 +5,7 @@ android {
     compileSdkVersion 27
     buildToolsVersion "27.0.2"
     defaultConfig {
-        applicationId "com.taptrack.roaring"
+        applicationId "com.taptrack.carrot"
         minSdkVersion 19
         targetSdkVersion 27
         versionCode 4

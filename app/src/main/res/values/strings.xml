@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Tappy External NFC</string>
-    <string name="activity_title">Tappy External NFC</string>
+    <string name="app_name">Tappy Kiosk Demo</string>
+    <string name="activity_title">Tappy Kiosk Demo</string>
     <string name="active_devices">Active Devices</string>
     <string name="autolaunch_urls">Open URLs</string>
     <string name="scan">Scan</string>
@@ -28,8 +28,9 @@
     <string name="status_connected">Connected</string>
     <string name="status_error">Error</string>
     <string name="status_closed">Closed</string>
-    <string name="active_devices_heading">Active Tappies (%1$d)</string>
+    <string name="active_devices_heading">Active Tappies</string>
     <string name="remove_all_tappies">Disconnect all Tappies</string>
     <string name="tappy_channel_name">Active Tappies</string>
     <string name="tappy_channel_description">Displays the currently connected Tappies</string>
+    <string name="kiosk_usb_no_support">Kiosk mode for TappyUSB devices is not supported</string>
 </resources>
