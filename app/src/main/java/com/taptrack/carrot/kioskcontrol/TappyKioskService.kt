@@ -480,16 +480,39 @@ class TappyKioskService: Service() {
     }
 
     protected fun broadcastCompat(intent: Intent) {
-        val pm = packageManager
-        val matches = pm.queryBroadcastReceivers(intent, 0)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val pm = packageManager
+            val matches = pm.queryBroadcastReceivers(intent, 0)
 
-        for (resolveInfo in matches) {
-            val explicit = Intent(intent)
-            val cn = ComponentName(resolveInfo.activityInfo.applicationInfo.packageName,
-                    resolveInfo.activityInfo.name)
+            for (resolveInfo in matches) {
+                if (resolveInfo.activityInfo != null) {
+                    val explicit = Intent(intent)
+                    val cn = ComponentName(resolveInfo.activityInfo.applicationInfo.packageName,
+                            resolveInfo.activityInfo.name)
 
-            explicit.component = cn
-            sendBroadcast(explicit)
+                    explicit.component = cn
+                    sendBroadcast(explicit)
+                } else if (resolveInfo.serviceInfo != null) {
+                    val explicit = Intent(intent)
+                    val cn = ComponentName(resolveInfo.serviceInfo.applicationInfo.packageName,
+                            resolveInfo.serviceInfo.name)
+
+                    explicit.component = cn
+                    sendBroadcast(explicit)
+                } else if (resolveInfo.providerInfo != null) {
+                    val explicit = Intent(intent)
+                    val cn = ComponentName(resolveInfo.providerInfo.applicationInfo.packageName,
+                            resolveInfo.providerInfo.name)
+
+                    explicit.component = cn
+                    sendBroadcast(explicit)
+                }
+            }
+
+            // also send implicit for runtime-registered receivers
+            sendBroadcast(intent)
+        } else {
+            sendBroadcast(intent)
         }
     }
     companion object {

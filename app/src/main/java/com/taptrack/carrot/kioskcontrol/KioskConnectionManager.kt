@@ -15,17 +15,17 @@ sealed class TappyKioskConfiguration {
             // the max tolerance before the kiosk is considered in an error state
             val maxHeartbeatReceiveToleranceErrSec: Long,
             // the intervals to send heartbeats at
-            val sendIntervalMn: Int,
+            val sendIntervalSec: Int,
             // the max tolerance before the kiosk should initiate a disconnect/reconnect
             // cycle
             val maxReceiveToleranceBeforeDiscSec: Long): TappyKioskConfiguration() {
 
-        constructor() : this(DEF_HB_REC_TOLERANCE_SEC, DEF_HB_SEND_INTERVAL_MN, DEF_HB_DISCONNECT_TOLERANCE_SEC)
+        constructor() : this(DEF_HB_REC_TOLERANCE_SEC, DEF_HB_SEND_INTERVAL_SEC, DEF_HB_DISCONNECT_TOLERANCE_SEC)
 
 
         companion object {
             val DEF_HB_REC_TOLERANCE_SEC = 10L
-            val DEF_HB_SEND_INTERVAL_MN = 4
+            val DEF_HB_SEND_INTERVAL_SEC = 15
             val DEF_HB_DISCONNECT_TOLERANCE_SEC = 30L
         }
     }
@@ -189,7 +189,7 @@ class KioskConnectionManager constructor(
                             Timber.v("Sending heartbeat to Tappy %s",tappy.deviceDescription)
                             tappy.sendMessage(pingCommand)
                             heartbeatHandler.removeCallbacks(hbSendRunnable)
-                            heartbeatHandler.postDelayed(hbSendRunnable,config.sendIntervalMn *60*1000L)
+                            heartbeatHandler.postDelayed(hbSendRunnable,config.sendIntervalSec *1000L)
                         } else {
                             Timber.v("Not sending heartbeat, device not ready %s",tappy.deviceDescription)
                         }
@@ -289,7 +289,7 @@ class KioskConnectionManager constructor(
                                 val configurationMsg = ConfigureKioskModeCommand(
                                         ConfigureKioskModeCommand.PollingSettings.NO_CHANGE,
                                         ConfigureKioskModeCommand.NdefSettings.NO_CHANGE,
-                                        config.sendIntervalMn,
+                                        config.sendIntervalSec,
                                         ConfigureKioskModeCommand.ScanErrorSettings.NO_CHANGE
                                 )
                                 tappy.sendMessage(configurationMsg)
