@@ -32,9 +32,9 @@ class CarrotApplication : Application() {
     }
 
     companion object {
-        val ACTION_TAG_FOUND = "com.taptrack.roaring.action.TAG_FOUND"
-        val ACTION_NDEF_FOUND = "com.taptrack.roaring.action.NDEF_FOUND"
-        val EXTRA_TAG_TYPE_INT = "com.taptrack.roaring.extra.TAG_TYPE"
+        val ACTION_TAG_FOUND = "com.taptrack.carrot.action.TAG_FOUND"
+        val ACTION_NDEF_FOUND = "com.taptrack.carrot.action.NDEF_FOUND"
+        val EXTRA_TAG_TYPE_INT = "com.taptrack.carrot.extra.TAG_TYPE"
 
         private val PREFS_GLOBAL = CarrotApplication::class.java.name+".PREFS_GLOBAL"
         private val KEY_AUTOLAUNCH = CarrotApplication::class.java.name+".KEY_AUTOLAUNCH"
