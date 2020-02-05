@@ -8,8 +8,8 @@ android {
         applicationId "com.taptrack.carrot"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 4
-        versionName "1.1.0"
+        versionCode 5
+        versionName "1.1.1"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -49,6 +49,7 @@ dependencies {
     compile 'com.taptrack.tcmptappy2:tappyble:2.0.0-beta3'
     compile 'com.taptrack.tcmptappy2:tcmp:2.0.0-beta3'
     compile 'com.taptrack.tcmptappy2:tappyusb:2.0.0-beta3'
+    compile 'com.github.felHR85:UsbSerial:4.5'
 //    compile 'com.taptrack.tcmptappy:tappyble-scanner:0.9.4'
 //    compile 'com.taptrack.tcmptappy:commlink-ble:0.9.4'
 
