@@ -97,23 +97,23 @@ private class KioskControlAdapter : RecyclerView.Adapter<KioskControlAdapter.VH>
         diffResult.dispatchUpdatesTo(this)
     }
 
-    override fun onBindViewHolder(holder: VH?, position: Int) {
+    override fun onBindViewHolder(holder: VH, position: Int) {
         val tappy = tappies[position]
-        holder?.bind(tappy)
+        holder.bind(tappy)
     }
 
-    override fun onViewAttachedToWindow(holder: VH?) {
+    override fun onViewAttachedToWindow(holder: VH) {
         super.onViewAttachedToWindow(holder)
-        holder?.subscribe()
+        holder.subscribe()
     }
 
-    override fun onViewDetachedFromWindow(holder: VH?) {
+    override fun onViewDetachedFromWindow(holder: VH) {
         super.onViewDetachedFromWindow(holder)
-        holder?.unsubscribe()
+        holder.unsubscribe()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): VH {
-        return VH(LayoutInflater.from(parent!!.context!!).inflate(R.layout.list_kiosk_control,parent,false) as ViewGroup)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
+        return VH(LayoutInflater.from(parent.context!!).inflate(R.layout.list_kiosk_control,parent,false) as ViewGroup)
     }
 
     override fun getItemCount(): Int = tappies.size

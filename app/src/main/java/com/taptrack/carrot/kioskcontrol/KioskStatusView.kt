@@ -4,7 +4,9 @@ import android.animation.ValueAnimator
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.os.Build
 import android.support.annotation.AnyThread
+import android.support.annotation.RequiresApi
 import android.support.annotation.UiThread
 import android.support.v4.content.ContextCompat
 import android.support.v4.widget.ImageViewCompat
@@ -31,11 +33,15 @@ class KioskStatusView : FrameLayout {
 
     private var heartbeatAnimator: ValueAnimator? = null
 
-    constructor(context: Context?) : this(context,null)
-    constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs, 0)
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : this(context, attrs, defStyleAttr, 0)
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes) {
-        initialize(context!!)
+    constructor(context: Context) : this(context,null)
+    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+        initialize(context)
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes) {
+        initialize(context)
     }
 
     private fun initialize(context:Context) {

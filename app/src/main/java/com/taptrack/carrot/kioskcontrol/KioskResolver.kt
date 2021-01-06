@@ -1,9 +1,7 @@
 package com.taptrack.carrot.kioskcontrol
 
 import android.nfc.NdefMessage
-import com.taptrack.tcmptappy.tcmp.MalformedPayloadException
-import com.taptrack.tcmptappy.tcmp.common.FamilyCodeNotSupportedException
-import com.taptrack.tcmptappy.tcmp.common.ResponseCodeNotSupportedException
+import com.taptrack.tcmptappy2.MalformedPayloadException
 import com.taptrack.tcmptappy2.MessageResolverMux
 import com.taptrack.tcmptappy2.TCMPMessage
 import com.taptrack.tcmptappy2.commandfamilies.basicnfc.BasicNfcCommandResolver
@@ -98,10 +96,6 @@ object KioskResolver {
                     return ResolvedMessage.UnexpectedResponse()
                 }
             }
-        } catch (e: FamilyCodeNotSupportedException) {
-            return ResolvedMessage.UnexpectedResponse()
-        } catch (e: ResponseCodeNotSupportedException) {
-            return ResolvedMessage.UnexpectedResponse()
         } catch (e: MalformedPayloadException) {
             return ResolvedMessage.UnexpectedResponse()
         }
