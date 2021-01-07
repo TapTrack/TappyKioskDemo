@@ -5,11 +5,11 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Build
-import android.support.annotation.AnyThread
-import android.support.annotation.RequiresApi
-import android.support.annotation.UiThread
-import android.support.v4.content.ContextCompat
-import android.support.v4.widget.ImageViewCompat
+import androidx.annotation.AnyThread
+import androidx.annotation.RequiresApi
+import androidx.annotation.UiThread
+import androidx.core.content.ContextCompat
+import androidx.core.widget.ImageViewCompat
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View

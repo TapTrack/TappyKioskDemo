@@ -3,7 +3,7 @@ package com.taptrack.carrot.utils
 import android.app.Activity
 import android.content.ContextWrapper
 import android.os.Build
-import android.support.annotation.StyleRes
+import androidx.annotation.StyleRes
 import android.view.View
 import android.widget.TextView
 
@@ -15,7 +15,7 @@ fun TextView.setTextAppearanceCompat(@StyleRes appearance: Int) {
     }
 }
 
-inline fun View.getHostActivity(): Activity? {
+fun View.getHostActivity(): Activity? {
     var context = this.context
     while (context is ContextWrapper) {
         if (context is Activity) {

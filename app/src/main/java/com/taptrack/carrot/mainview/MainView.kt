@@ -1,14 +1,13 @@
 package com.taptrack.carrot.mainview
 
 import android.content.Context
-import android.support.v4.widget.NestedScrollView
 import android.util.AttributeSet
 import android.view.Gravity
-import android.view.ViewGroup
 import android.view.ViewManager
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.widget.NestedScrollView
 import com.taptrack.carrot.R
 import com.taptrack.carrot.findtappies.TappySearchView
 import com.taptrack.carrot.findtappies.tappySearchView
@@ -18,7 +17,7 @@ import com.taptrack.carrot.utils.setTextAppearanceCompat
 import org.jetbrains.anko.*
 import org.jetbrains.anko.custom.ankoView
 
-inline fun ViewManager.chooseTappiesView() = chooseTappiesView({})
+fun ViewManager.chooseTappiesView() = chooseTappiesView { }
 
 inline fun ViewManager.chooseTappiesView(init: ChooseTappiesView.() -> Unit): ChooseTappiesView {
     return ankoView({ ChooseTappiesView(it) }, theme = 0, init = init)
@@ -47,7 +46,7 @@ class ChooseTappiesView : NestedScrollView {
 
     private fun init(context: Context) {
 
-        val llLayoutParams = ViewGroup.MarginLayoutParams(matchParent, matchParent)
+        val llLayoutParams = MarginLayoutParams(matchParent, matchParent)
         linearLayout {
             orientation = LinearLayout.VERTICAL
 

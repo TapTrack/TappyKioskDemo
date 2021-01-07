@@ -11,6 +11,7 @@ echimamish/release/
 
 .idea/markdown-navigator.xml
 .idea/markdown-navigator/*
+.idea/caches
 
 # Created by https://www.gitignore.io/api/git,java,macos,linux,windows,android,intellij,intellij+iml,androidstudio
 

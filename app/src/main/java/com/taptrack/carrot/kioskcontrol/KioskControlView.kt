@@ -1,9 +1,9 @@
 package com.taptrack.carrot.kioskcontrol
 
 import android.content.Context
-import android.support.v7.util.DiffUtil
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -24,7 +24,7 @@ interface KioskControlViewModelProvider {
     fun provideKioskControlViewModel(): KioskControlViewModel
 }
 
-inline fun ViewManager.kioskControlView() = kioskControlView({})
+fun ViewManager.kioskControlView() = kioskControlView { }
 
 inline fun ViewManager.kioskControlView(init: KioskControlView.() -> Unit): KioskControlView {
     return ankoView({ KioskControlView(it) }, theme = 0, init = init)

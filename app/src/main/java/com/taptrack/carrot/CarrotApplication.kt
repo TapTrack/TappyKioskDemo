@@ -9,8 +9,8 @@ import io.reactivex.Observable
 import timber.log.Timber
 
 class CarrotApplication : Application() {
-    lateinit private var prefs: SharedPreferences
-    lateinit private var rxPrefs: RxSharedPreferences
+    private lateinit var prefs: SharedPreferences
+    private lateinit var rxPrefs: RxSharedPreferences
 
     override fun onCreate() {
         super.onCreate()
@@ -32,13 +32,13 @@ class CarrotApplication : Application() {
     }
 
     companion object {
-        val ACTION_TAG_FOUND = "com.taptrack.carrot.action.TAG_FOUND"
-        val ACTION_NDEF_FOUND = "com.taptrack.carrot.action.NDEF_FOUND"
-        val EXTRA_TAG_TYPE_INT = "com.taptrack.carrot.extra.TAG_TYPE"
+        const val ACTION_TAG_FOUND = "com.taptrack.carrot.action.TAG_FOUND"
+        const val ACTION_NDEF_FOUND = "com.taptrack.carrot.action.NDEF_FOUND"
+        const val EXTRA_TAG_TYPE_INT = "com.taptrack.carrot.extra.TAG_TYPE"
 
         private val PREFS_GLOBAL = CarrotApplication::class.java.name+".PREFS_GLOBAL"
         private val KEY_AUTOLAUNCH = CarrotApplication::class.java.name+".KEY_AUTOLAUNCH"
     }
 }
 
-inline fun Context.getCarrotApplication() = this.applicationContext as CarrotApplication
+fun Context.getCarrotApplication() = this.applicationContext as CarrotApplication

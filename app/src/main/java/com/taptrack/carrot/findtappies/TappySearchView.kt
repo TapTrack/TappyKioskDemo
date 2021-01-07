@@ -2,11 +2,11 @@ package com.taptrack.carrot.findtappies
 
 import android.content.Context
 import android.hardware.usb.UsbDevice
-import android.support.annotation.UiThread
-import android.support.v7.util.DiffUtil
-import android.support.v7.widget.AppCompatImageView
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.annotation.UiThread
+import androidx.recyclerview.widget.DiffUtil
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -56,7 +56,7 @@ interface TappySearchViewModelProvider {
     fun provideTappySearchViewModel(): TappySearchViewModel
 }
 
-inline fun ViewManager.tappySearchView() = tappySearchView({})
+fun ViewManager.tappySearchView() = tappySearchView { }
 
 inline fun ViewManager.tappySearchView(init: TappySearchView.() -> Unit): TappySearchView {
     return ankoView({ TappySearchView(it) }, theme = 0, init = init)
@@ -65,10 +65,10 @@ inline fun ViewManager.tappySearchView(init: TappySearchView.() -> Unit): TappyS
 class TappySearchView : RecyclerView {
     private lateinit var adapter: TappySearchAdapter
     var currentTappies: Collection<ChoosableTappy> = emptySet()
-    set(value) {
-        field = value
-        reset()
-    }
+        set(value) {
+            field = value
+            reset()
+        }
 
     private var vm: TappySearchViewModel? = null
     private var disposable: Disposable? = null
@@ -122,7 +122,7 @@ class TappySearchView : RecyclerView {
         super.onAttachedToWindow()
         vm = (getHostActivity() as? TappySearchViewModelProvider)?.provideTappySearchViewModel()
         disposable = vm?.getChoosableTappies()?.subscribe {
-            post { currentTappies = it}
+            post { currentTappies = it }
         }
     }
 
@@ -136,7 +136,7 @@ private class TappySearchAdapter : RecyclerView.Adapter<TappySearchAdapter.VH>()
     private var tappySelectionListener: TappySelectionListener? = null
     private var deviceList: List<ChoosableTappy>
 
-    internal class TappyDeviceDiffCb(private val newTappies: List<ChoosableTappy>, private val oldTappies: List<ChoosableTappy>) : DiffUtil.Callback() {
+    class TappyDeviceDiffCb(private val newTappies: List<ChoosableTappy>, private val oldTappies: List<ChoosableTappy>) : DiffUtil.Callback() {
 
         override fun getOldListSize(): Int {
             return oldTappies.size
@@ -183,7 +183,7 @@ private class TappySearchAdapter : RecyclerView.Adapter<TappySearchAdapter.VH>()
         result.dispatchUpdatesTo(this)
     }
 
-    internal inner class VH(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class VH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val iconView: AppCompatImageView = itemView.find<AppCompatImageView>(R.id.iv_icon)
         private val tappyTitleView: TextView = itemView.find<TextView>(R.id.tv_title)
         private val tappySubtitleView: TextView = itemView.find<TextView>(R.id.tv_subtitle)
@@ -194,9 +194,9 @@ private class TappySearchAdapter : RecyclerView.Adapter<TappySearchAdapter.VH>()
             itemView.setOnClickListener {
                 val device = currentDevice
                 if (device != null && tappySelectionListener != null) {
-                    when(device) {
-                    is ChoosableTappyBle -> tappySelectionListener?.tappyBleSelected(device.definition)
-                    is ChoosableTappyUsb -> tappySelectionListener?.tappyUsbSelected(device.device)
+                    when (device) {
+                        is ChoosableTappyBle -> tappySelectionListener?.tappyBleSelected(device.definition)
+                        is ChoosableTappyUsb -> tappySelectionListener?.tappyUsbSelected(device.device)
                     }
                 }
             }
@@ -206,7 +206,7 @@ private class TappySearchAdapter : RecyclerView.Adapter<TappySearchAdapter.VH>()
             tappyTitleView.text = device.name
             tappySubtitleView.text = device.description
             currentDevice = device
-            when(device) {
+            when (device) {
                 is ChoosableTappyBle -> iconView.setImageResource(R.drawable.ic_bluetooth_black_24dp)
                 is ChoosableTappyUsb -> iconView.setImageResource(R.drawable.ic_usb_black_24dp)
             }

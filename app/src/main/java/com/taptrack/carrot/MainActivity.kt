@@ -10,8 +10,8 @@ import android.hardware.usb.UsbManager
 import android.os.Build
 import android.os.IBinder
 import android.os.Looper
-import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatDelegate
+import com.google.android.material.snackbar.Snackbar
+import androidx.appcompat.app.AppCompatDelegate
 import android.view.ViewGroup
 import android.widget.ImageView
 import com.jakewharton.rxrelay2.BehaviorRelay
@@ -33,10 +33,10 @@ import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import org.jetbrains.anko.contentView
 import timber.log.Timber
-
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity :
-        android.support.v7.app.AppCompatActivity(),
+        AppCompatActivity(),
         TappySearchViewModelProvider,
         KioskControlViewModelProvider {
 
@@ -162,7 +162,7 @@ class MainActivity :
         val roaringApp = getCarrotApplication()
 
         openUrlsButton = findViewById(R.id.ib_launch_urls)
-        openUrlsButton?.setOnClickListener({
+        openUrlsButton?.setOnClickListener {
             val localButtonCopy = openUrlsButton
             val shouldBeEnabled = !isAutolaunchingEnabled
             roaringApp.setAutolaunchEnabled(shouldBeEnabled)
@@ -173,7 +173,7 @@ class MainActivity :
                     Snackbar.make(localButtonCopy,R.string.automatic_url_launching_disabled,Snackbar.LENGTH_SHORT).show()
                 }
             }
-        })
+        }
 
         permissionDelegate = UsbPermissionDelegate(this, usbPermissionListener)
         searchManager = SearchManagementDelegate(this,object : SearchResultsListener {
@@ -206,7 +206,7 @@ class MainActivity :
 
     private fun addUsbDeviceFromIntent(intent: Intent?) {
         if (intent != null && intent.hasExtra(UsbManager.EXTRA_DEVICE)) {
-            val device = intent.getParcelableExtra<UsbDevice>(UsbManager.EXTRA_DEVICE)
+            val device = intent.getParcelableExtra<UsbDevice>(UsbManager.EXTRA_DEVICE)!!
             connectToUsbDevice(device)
         }
     }
@@ -245,11 +245,11 @@ class MainActivity :
         val app = getCarrotApplication()
         preferencesDisposable = app.getAutolaunchEnabled()
                 .subscribe {
-            isAutolaunchingEnabled = it
-            handler.post({
-                resetOpenUrlsButton()
-            })
-        }
+                    isAutolaunchingEnabled = it
+                    handler.post {
+                        resetOpenUrlsButton()
+                    }
+                }
 
         permissionDelegate.register()
         bindService(Intent(this, TappyKioskService::class.java),serviceConnection, Context.BIND_AUTO_CREATE or Context.BIND_IMPORTANT)
@@ -293,4 +293,3 @@ class MainActivity :
         }
     }
 }
-
