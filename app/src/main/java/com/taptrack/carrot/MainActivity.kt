@@ -139,16 +139,16 @@ class MainActivity :
 
     override fun provideKioskControlViewModel(): KioskControlViewModel = kioskControlViewModel
 
-    private val coarseLocationListener = object: PermissionListener {
+    private val fineLocationListener = object: PermissionListener {
         override fun onPermissionGranted(response: PermissionGrantedResponse?) {
-            searchManager.coarseLocationRequestResult(true)
+            searchManager.fineLocationRequestResult(true)
         }
 
         override fun onPermissionRationaleShouldBeShown(permission: PermissionRequest?, token: PermissionToken?) {
         }
 
         override fun onPermissionDenied(response: PermissionDeniedResponse?) {
-            searchManager.coarseLocationRequestResult(false)
+            searchManager.fineLocationRequestResult(false)
         }
     }
 
@@ -185,15 +185,15 @@ class MainActivity :
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val snackbarPermissionListener = SnackbarOnDeniedPermissionListener.Builder
-                    .with(contentView as ViewGroup, R.string.coarse_location_needed_rationale)
+                    .with(contentView as ViewGroup, R.string.fine_location_needed_rationale)
                     .withOpenSettingsButton(R.string.settings)
                     .build()
             Dexter.withActivity(this)
-                    .withPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
-                    .withListener(CompositePermissionListener(snackbarPermissionListener, coarseLocationListener))
+                    .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                    .withListener(CompositePermissionListener(snackbarPermissionListener, fineLocationListener))
                     .check()
         } else {
-            searchManager.coarseLocationRequestResult(true)
+            searchManager.fineLocationRequestResult(true)
         }
 
         addUsbDeviceFromIntent(intent)
